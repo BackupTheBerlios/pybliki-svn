@@ -1,0 +1,8 @@
+- Migrate blog code to bliki
+- Text format
+    - mail/link recognition in comments
+    - '*' bolding
+    - '_' underline
+    - '/' italic
+    - '[]' URL's
+- configuration in XML file

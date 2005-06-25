@@ -1,3 +1,0 @@
-- Migrate blog code to bliki
-- configuration in ini files (python has default ini file parser)
-- use docutils

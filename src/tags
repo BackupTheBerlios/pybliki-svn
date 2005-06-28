@@ -1,0 +1,17 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+BlikiConfig	BlikiConfig.py	/^class BlikiConfig:$/;"	c
+BlikiConfigException	BlikiConfig.py	/^class BlikiConfigException(Exception):$/;"	c
+TestPyBliki	tests.py	/^class TestPyBliki(unittest.TestCase):$/;"	c
+__init__	BlikiConfig.py	/^    def __init__(self):$/;"	m	class:BlikiConfig
+generatePage	xsite.py	/^def generatePage(cfg, text):$/;"	f
+generateRSS	rss.py	/^def generateRSS(entries)$/;"	f
+get	BlikiConfig.py	/^    def get(self, section, option):$/;"	m	class:BlikiConfig
+getEntryInformation	pybliki.py	/^def getEntryInformation(xml):$/;"	f
+main	pybliki.py	/^def main():$/;"	f
+testNull	tests.py	/^    def testNull(self):$/;"	m	class:TestPyBliki
+testRoot	BlikiConfig.py	/^    def testRoot(self, root, files):$/;"	m	class:BlikiConfig

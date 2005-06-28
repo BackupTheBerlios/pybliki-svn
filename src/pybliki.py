@@ -62,6 +62,7 @@ def main():
                 page = generatePage(cfg, text)
 
         # generate index file
+        # TODO: generate directories
         esort = lambda d1, d2: d1['date'] < d2['date']
         entries.sort(esort)
 

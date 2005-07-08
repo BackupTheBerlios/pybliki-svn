@@ -9,7 +9,7 @@ BlikiConfigException	BlikiConfig.py	/^class BlikiConfigException(Exception):$/;"
 TestPyBliki	tests.py	/^class TestPyBliki(unittest.TestCase):$/;"	c
 __init__	BlikiConfig.py	/^    def __init__(self):$/;"	m	class:BlikiConfig
 generatePage	xsite.py	/^def generatePage(cfg, text):$/;"	f
-generateRSS	rss.py	/^def generateRSS(entries)$/;"	f
+generateRSS	rss.py	/^def generateRSS(entries, root, name, webroot):$/;"	f
 get	BlikiConfig.py	/^    def get(self, section, option):$/;"	m	class:BlikiConfig
 getEntryInformation	pybliki.py	/^def getEntryInformation(xml):$/;"	f
 main	pybliki.py	/^def main():$/;"	f

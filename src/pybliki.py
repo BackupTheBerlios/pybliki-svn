@@ -41,8 +41,8 @@ def main():
             if splitext(filename)[1][1:] == \
                 cfg.get('blog', 'extension')[1]:
 
-                #locale.setlocale(locale.LC_ALL, 
-                #                 cfg.get('blog', 'locale')[1])
+                locale.setlocale(locale.LC_ALL, 
+                                 cfg.get('blog', 'locale')[1])
 
                 svn_log = 'svn log --xml --limit 1 %s' % (join(root, filename),)
                 pipe = os.popen(svn_log)
@@ -60,6 +60,7 @@ def main():
                 entries.append(entry)
 
                 page = generatePage(cfg, text)
+                entry['name'] = splitext(filename)[0]
 
         # generate index file
         # TODO: generate directories
@@ -75,7 +76,10 @@ def main():
         page = generatePage(cfg, text)
 
         # TODO: generate RSS file, entry filename
-        generateRSS(entries)
+        generateRSS(entries,
+                    root,
+                    cfg.get('blog', 'name')[1],
+                    cfg.get('blog', 'webroot')[1])
 
 
         if '.svn' in dirs:

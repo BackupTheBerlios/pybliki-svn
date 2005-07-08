@@ -41,8 +41,8 @@ def main():
             if splitext(filename)[1][1:] == \
                 cfg.get('blog', 'extension')[1]:
 
-                locale.setlocale(locale.LC_ALL, 
-                                 cfg.get('blog', 'locale')[1])
+                #locale.setlocale(locale.LC_ALL, 
+                #                 cfg.get('blog', 'locale')[1])
 
                 svn_log = 'svn log --xml --limit 1 %s' % (join(root, filename),)
                 pipe = os.popen(svn_log)

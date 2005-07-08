@@ -1,4 +1,4 @@
-def generateRSS(entries)
+def generateRSS(entries):
     print '<?xml version="1.0" encoding="utf-8"?>'
     print '<rss version="2.0">'
     print '<channel>'

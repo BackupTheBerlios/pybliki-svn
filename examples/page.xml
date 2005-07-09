@@ -10,7 +10,8 @@
     <link rel="shortcut icon" href="%(icon)s" type="image/x-icon" />
 </head>
 <body>
-    <h1>ダド一九四五</h1>
+    <h1><a href="index.html">%(blogname)s</a></h1>
+    <div class="date">%(date)s</div>
     %(body)s
 </body>
 </html>

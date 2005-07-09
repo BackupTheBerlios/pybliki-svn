@@ -35,9 +35,11 @@ def generatePage(root, cfg, entry):
     data['title'] = entry['title']
     data['author'] = entry['log'][-1]['author']
     path, css = cfg.get('misc', 'css')
-    data['css'] =  os.path.join(path, css)
+    relpath = '../'*root[len(path):].count('/')
+    data['css'] =  os.path.join(relpath, css)
     path, icon = cfg.get('misc', 'x-icon')
-    data['icon'] = os.path.join(path, icon)
+    relpath = '../'*root[len(path):].count('/')
+    data['icon'] = os.path.join(relpath, icon)
     parts = publish_parts(entry['text'], writer_name='html')
     data['body'] = parts['html_body'].encode('utf-8')
     data['blogname'] = cfg.get('blog', 'name')[1]

@@ -8,10 +8,12 @@ BlikiConfig	BlikiConfig.py	/^class BlikiConfig:$/;"	c
 BlikiConfigException	BlikiConfig.py	/^class BlikiConfigException(Exception):$/;"	c
 TestPyBliki	tests.py	/^class TestPyBliki(unittest.TestCase):$/;"	c
 __init__	BlikiConfig.py	/^    def __init__(self):$/;"	m	class:BlikiConfig
-generatePage	xsite.py	/^def generatePage(cfg, text):$/;"	f
-generateRSS	rss.py	/^def generateRSS(entries, root, name, webroot):$/;"	f
+generateBanners	pages.py	/^def generateBanners(root, cfg):$/;"	f
+generateIndex	pages.py	/^def generateIndex(root, dirs, cfg, entries):$/;"	f
+generatePage	pages.py	/^def generatePage(root, cfg, entry):$/;"	f
+generateRSS	rss.py	/^def generateRSS(root, cfg, entries):$/;"	f
 get	BlikiConfig.py	/^    def get(self, section, option):$/;"	m	class:BlikiConfig
-getEntryInformation	pybliki.py	/^def getEntryInformation(filename):$/;"	f
+getEntryInformation	entry.py	/^def getEntryInformation(filename):$/;"	f
 main	pybliki.py	/^def main():$/;"	f
 testNull	tests.py	/^    def testNull(self):$/;"	m	class:TestPyBliki
 testRoot	BlikiConfig.py	/^    def testRoot(self, root, files):$/;"	m	class:BlikiConfig

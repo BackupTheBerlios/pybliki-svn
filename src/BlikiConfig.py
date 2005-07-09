@@ -1,5 +1,5 @@
 import ConfigParser
-from os.path import join
+import os
 
 class BlikiConfigException(Exception):
     pass
@@ -28,14 +28,14 @@ class BlikiConfig:
             while not found and len(self.config) > 0:
                 try:
                     root.index(self.config[-1]['path'])
-                    found = true
+                    found = True
                 except ValueError:
                     self.config.pop()
 
         try:
             files.index('pybliki.cfg')
             cfg = ConfigParser.ConfigParser()
-            cfg.read([join(root, 'pybliki.cfg')])
+            cfg.read([os.path.join(root, 'pybliki.cfg')])
             self.config.append({'path': root, 'config': cfg})
         except ValueError:
             pass
@@ -47,14 +47,11 @@ class BlikiConfig:
             while True:
                 try:
                     res = self.config[idx]['config'].get(section, option)
-                    #pathlen = len(self.config[idx]['path'])
-                    #slash = self.current_path[pathlen:].count('/')
-                    #relpath = '../'*slash
 
                     return (self.config[idx]['path'], res)
                 except (ConfigParser.NoSectionError,
                         ConfigParser.NoOptionError):
                     idx -= 1
         except IndexError:
-            raise BlikiConfigException('Section "%s":Option "%s" not found' %
+            raise BlikiConfigException('Section "%s", Option "%s" not found' %
                                        (section, option))

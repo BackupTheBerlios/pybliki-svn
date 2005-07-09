@@ -1,27 +1,46 @@
 from os.path import join
-from time import strftime, gmtime
+from docutils.core import publish_parts
+import time
 import locale
 
-def generateRSS(entries, root, name, webroot):
+def generateRSS(root, cfg, entries):
+    text = ''
+    text += '<?xml version="1.0" encoding="utf-8"?>'
+    text += '<rss version="2.0">'
+    text += '<channel>'
+    text += '<title>%s</title>' % cfg.get('blog', 'name')[1]
+    text += '<link>http://%s</link>' % cfg.get('blog', 'webroot')[1]
+    text += '<description> %s at http://%s</description>' % \
+            (cfg.get('blog', 'name')[1], cfg.get('blog', 'webroot')[1])
 
-    locale.setlocale(locale.LC_ALL, 'C')
+    for entry in entries[:10]:
+        text += '<item>'
+        text += '<title> %s </title>' % entry["title"]
+        text += '<link>http://%s.html'\
+              '</link>' % join(cfg.get('blog', 'webroot')[1],
+                               root, entry['name'])
 
-    print '<?xml version="1.0" encoding="utf-8"?>'
-    print '<rss version="2.0">'
-    print '<channel>'
-    print '<title>%s</title>' % name
-    print '<link>http://%s</link>' % webroot
-    print '<description> %s at http://%s</description>' % (name, webroot)
+        locale.setlocale(locale.LC_ALL, cfg.get('blog', 'locale')[1])
+        rst = ''
+        for change in entry['log']:
+            rst += time.strftime(cfg.get('blog', 'timestamp')[1],
+                                         change['date']) + '\n'
+            for line in change['msg'].split('\n'):
+                rst += ' '*4 + line + '\n'
+            rst += '\n'
 
-    for idx, entry in enumerate(entries[:10]):
-        print '<item>'
-        print '<title> %s </title>' % entry["title"]
-        print '<link> http://%s.html'\
-              '</link>' % join(webroot, root, entry["name"])
-        print '<description> %s </description>' % entry["msg"]
-        print '<pubDate> %s </pubDate>' % \
-                strftime("%a, %d %b %Y %H:%M:%S GMT", entry["date"])
-        print '</item>'
+        parts = publish_parts(rst, writer_name='html')
 
-    print '</channel>'
-    print '</rss>'
+        tr = lambda s: s.replace('&', '&amp;').replace('<','&lt;').replace('>','&gt;')
+
+        text += '<description>%s</description>' % \
+                tr(parts['html_body'].encode('utf-8'))
+        locale.setlocale(locale.LC_ALL, 'C')
+        text += '<pubDate>%s</pubDate>' % \
+                time.strftime("%a, %d %b %Y %H:%M:%S GMT",
+                              entry['log'][0]['date'])
+        text += '</item>'
+
+    text += '</channel>'
+    text += '</rss>'
+    return text

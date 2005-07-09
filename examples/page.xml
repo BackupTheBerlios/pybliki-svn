@@ -15,5 +15,7 @@
     <div class="date">%(date)s</div>
     %(body)s
     <div>%(banners)s</div>
+    <hr/>
+    <a href="mailto:dado1945@gmail.com">dado1945@gmail.com</a>&copy;
 </body>
 </html>

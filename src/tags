@@ -11,7 +11,7 @@ __init__	BlikiConfig.py	/^    def __init__(self):$/;"	m	class:BlikiConfig
 generatePage	xsite.py	/^def generatePage(cfg, text):$/;"	f
 generateRSS	rss.py	/^def generateRSS(entries, root, name, webroot):$/;"	f
 get	BlikiConfig.py	/^    def get(self, section, option):$/;"	m	class:BlikiConfig
-getEntryInformation	pybliki.py	/^def getEntryInformation(xml):$/;"	f
+getEntryInformation	pybliki.py	/^def getEntryInformation(filename):$/;"	f
 main	pybliki.py	/^def main():$/;"	f
 testNull	tests.py	/^    def testNull(self):$/;"	m	class:TestPyBliki
 testRoot	BlikiConfig.py	/^    def testRoot(self, root, files):$/;"	m	class:BlikiConfig

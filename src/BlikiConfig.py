@@ -47,11 +47,11 @@ class BlikiConfig:
             while True:
                 try:
                     res = self.config[idx]['config'].get(section, option)
-                    pathlen = len(self.config[idx]['path'])
-                    slash = self.current_path[pathlen:].count('/')
-                    relpath = '../'*slash
+                    #pathlen = len(self.config[idx]['path'])
+                    #slash = self.current_path[pathlen:].count('/')
+                    #relpath = '../'*slash
 
-                    return (relpath, res)
+                    return (self.config[idx]['path'], res)
                 except (ConfigParser.NoSectionError,
                         ConfigParser.NoOptionError):
                     idx -= 1

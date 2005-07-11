@@ -73,8 +73,9 @@ def generateIndex(root, dirs, cfg, entries):
 
     text = 'Index\n=====\n\n'
 
+    text += '* `.. <..>`__\n'
     for dir in dirs:
-        text += '* ' + dir + '\n'
+        text += '* `%(dir)s <%(dir)s>`__\n' % {'dir': dir}
     text += '\n'
 
     locale.setlocale(locale.LC_ALL, cfg.get('blog', 'locale')[1])

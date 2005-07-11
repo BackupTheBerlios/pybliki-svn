@@ -64,8 +64,12 @@ def generateIndex(root, dirs, cfg, entries):
 
     entry = {}
     entry['title'] = 'Index'
-    entry['log'] = [{'date': entries[0]['log'][0]['date'],
-                     'author': entries[0]['log'][0]['author']}]
+    if len(entries) > 0:
+        entry['log'] = [{'date': entries[0]['log'][0]['date'],
+                         'author': entries[0]['log'][0]['author']}]
+    else:
+        entry['log'] = [{'date': time.gmtime(time.time()),
+                         'author': ''}]
 
     text = 'Index\n=====\n\n'
 

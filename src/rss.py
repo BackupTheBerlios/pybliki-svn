@@ -38,7 +38,7 @@ def generateRSS(root, cfg, entries):
         locale.setlocale(locale.LC_ALL, 'C')
         text += '<pubDate>%s</pubDate>' % \
                 time.strftime("%a, %d %b %Y %H:%M:%S GMT",
-                              entry['log'][0]['date'])
+                              entry['log'][-1]['date'])
         text += '</item>'
 
     text += '</channel>'

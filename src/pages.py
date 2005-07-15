@@ -58,10 +58,6 @@ def generatePage(root, cfg, entry):
 
 
 def generateIndex(root, dirs, cfg, entries):
-    esort = lambda d1, d2: d1['log'][0]['date'] < d2['log'][0]['date']
-    entries.sort(esort)
-    entries.reverse()
-
     entry = {}
     entry['title'] = 'Index'
     if len(entries) > 0:

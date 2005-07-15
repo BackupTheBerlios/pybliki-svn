@@ -18,7 +18,10 @@ def getEntryInformation(filename):
         log[-1]['author'] = author.firstChild.nodeValue.encode('utf-8')
 
         msg = logentry.getElementsByTagName('msg')[0]
-        log[-1]['msg'] = msg.firstChild.nodeValue.encode('utf-8')
+        if msg.firstChild is not None:
+            log[-1]['msg'] = msg.firstChild.nodeValue.encode('utf-8')
+        else:
+            log[-1]['msg'] = ''
 
         date = logentry.getElementsByTagName('date')[0]
         log[-1]['date'] = strptime(date.firstChild.nodeValue[:19],

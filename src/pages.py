@@ -82,11 +82,12 @@ def generateIndex(root, dirs, cfg, entries):
         e['log'].reverse()
 
         for change in e['log']:
-            text += ' '*4 + time.strftime(cfg.get('blog', 'timestamp')[1],
-                                         change['date']) + '\n'
-            for line in change['msg'].split('\n'):
-                text += ' '*8 + line + '\n'
-            text += '\n'
+            if len(change['msg']) > 0:
+                text += ' '*4 + time.strftime(cfg.get('blog', 'timestamp')[1],
+                                             change['date']) + '\n'
+                for line in change['msg'].split('\n'):
+                    text += ' '*8 + line + '\n'
+                text += '\n'
 
     entry['text'] = text
 

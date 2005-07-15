@@ -23,11 +23,12 @@ def generateRSS(root, cfg, entries):
         locale.setlocale(locale.LC_ALL, cfg.get('blog', 'locale')[1])
         rst = ''
         for change in entry['log']:
-            rst += time.strftime(cfg.get('blog', 'timestamp')[1],
-                                         change['date']) + '\n'
-            for line in change['msg'].split('\n'):
-                rst += ' '*4 + line + '\n'
-            rst += '\n'
+            if len(change['msg']) > 0:
+                rst += time.strftime(cfg.get('blog', 'timestamp')[1],
+                                             change['date']) + '\n'
+                for line in change['msg'].split('\n'):
+                    rst += ' '*4 + line + '\n'
+                rst += '\n'
 
         parts = publish_parts(rst, writer_name='html')
 

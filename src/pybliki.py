@@ -44,8 +44,11 @@ def main():
 
         banners_path, banners_dir = cfg.get('banners', 'dir')
         if banners_path == root:
-            shutil.copytree(os.path.join(banners_path, banners_dir),
-                            os.path.join(tempdir, dirname, banners_dir))
+            os.mkdir(os.path.join(tempdir, dirname, banners_dir))
+            for name in os.listdir(os.path.join(banners_path, banners_dir)):
+                fullname = os.path.join(banners_path, banners_dir, name)
+                if os.path.isfile(fullname):
+                    shutil.copy(fullname, os.path.join(tempdir, dirname, banners_dir, name))
 
         # get entries and print pages
         index_exists = False

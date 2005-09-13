@@ -1,6 +1,7 @@
 import os
 from xml.dom.minidom import parseString
 from time import strptime
+from re import findall
 
 def getEntryInformation(filename):
     svn_log = 'svn log --xml %s' % filename
@@ -34,9 +35,32 @@ def getEntryInformation(filename):
     text = f.read()
     f.close()
 
+    # scan for additional links in text file
+    additional_files = []
+
+    images = findall('image:: ', text)
+    for image in images:
+        spos = len('image:: ')
+        imagefile = image[spos:].strip()
+        additional_files.append(imagefile)
+
+    files = findall('`.*\<.*\>`__', text)
+    for f in files:
+        if f.find('http://') == -1:
+            spos = f.find('<')
+            epos = f.find('>')
+            additional_files.append(f[spos+1:epos])
+
+    for image in images:
+        spos = len('image:: ')
+        imagefile = image[spos:].strip()
+        additional_files.append(imagefile)
+
+    # set data
     data['text'] = text
     data['title'] = text.split('\n', 1)[0]
     data['name'] = os.path.splitext(os.path.basename(filename))[0]
+    data['files'] = additional_files
 
     return data
 

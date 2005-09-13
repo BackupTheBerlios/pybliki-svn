@@ -48,7 +48,8 @@ def main():
             for name in os.listdir(os.path.join(banners_path, banners_dir)):
                 fullname = os.path.join(banners_path, banners_dir, name)
                 if os.path.isfile(fullname):
-                    shutil.copy(fullname, os.path.join(tempdir, dirname, banners_dir, name))
+                    shutil.copy(fullname, os.path.join(tempdir, dirname,
+                                                       banners_dir, name))
 
         # get entries and print pages
         index_exists = False
@@ -68,6 +69,23 @@ def main():
                 f.write(page)
                 f.close()
 
+                # copy images and other files
+                for f in entry['files']:
+                    filepath = os.path.join(tempdir, dirname, f)
+                    filepath = os.path.normpath(filepath)
+                    addpath, addfile = os.path.split(filepath)
+
+                    tocreate = []
+                    while not os.path.isdir(addpath):
+                        addpath, notexists = os.path.split(addpath)
+                        tocreate.append(notexists)
+
+                    while len(tocreate) > 0:
+                        addpath = os.path.join(addpath, tocreate.pop())
+                        os.mkdir(addpath)
+
+                    shutil.copy(os.path.join(root, f), filepath)
+
         # Remove ignored folders
         if '.svn' in dirs:
             dirs.remove('.svn')  # don't visit subversion directories
@@ -80,7 +98,7 @@ def main():
             logfile = 'log.html'
 
         page = generateIndex(root, dirs, cfg, entries)
-        f = file(os.path.join(tempdir, dirname, 'index.html'), 'w')
+        f = file(os.path.join(tempdir, dirname, logfile), 'w')
         f.write(page)
         f.close()
 

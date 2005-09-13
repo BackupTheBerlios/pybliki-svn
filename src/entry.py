@@ -38,7 +38,7 @@ def getEntryInformation(filename):
     # scan for additional links in text file
     additional_files = []
 
-    images = findall('image:: ', text)
+    images = findall('image::\s.*', text)
     for image in images:
         spos = len('image:: ')
         imagefile = image[spos:].strip()

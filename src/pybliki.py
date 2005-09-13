@@ -48,12 +48,16 @@ def main():
                             os.path.join(tempdir, dirname, banners_dir))
 
         # get entries and print pages
+        index_exists = False
         for filename in files:
             if os.path.splitext(filename)[1][1:] == \
                 cfg.get('blog', 'extension')[1]:
 
                 entry = getEntryInformation(os.path.join(root, filename))
                 entries.append(entry)
+
+                if entry['name'] == 'index':
+                    index_exists = True
 
                 page = generatePage(root, cfg, entry)
                 f = file(os.path.join(tempdir, dirname, entry['name']+'.html'),
@@ -67,6 +71,10 @@ def main():
 
         if banners_path == root and banners_dir in dirs:
             dirs.remove(banners_dir)   # don't visit banners directories
+
+        logfile = 'index.html'
+        if index_exists:
+            logfile = 'log.html'
 
         page = generateIndex(root, dirs, cfg, entries)
         f = file(os.path.join(tempdir, dirname, 'index.html'), 'w')

@@ -1,8 +1,6 @@
 PyBliki
 -------
 
-image:: favicon.ico
-
 What is PyBliki ?
 =================
 

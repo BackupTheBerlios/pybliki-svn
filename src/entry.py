@@ -51,11 +51,6 @@ def getEntryInformation(filename):
             epos = f.find('>')
             additional_files.append(f[spos+1:epos])
 
-    for image in images:
-        spos = len('image:: ')
-        imagefile = image[spos:].strip()
-        additional_files.append(imagefile)
-
     # set data
     data['text'] = text
     data['title'] = text.split('\n', 1)[0]

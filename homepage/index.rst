@@ -37,3 +37,4 @@ TODO
 #. Unit-test (good habbit that I don't have)
 #. Time-zones configuration
 #. log file
+#. make it browsable easy

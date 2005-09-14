@@ -26,7 +26,7 @@ def generateRSS(root, cfg, entries):
             locale.setlocale(locale.LC_ALL, cfg.get('blog', 'locale')[1])
             rst = ''
             if len(entry['log']) == 1:
-                rst = change['msg']
+                rst = entry['log'][0]['msg']
             else:
                 for change in entry['log']:
                     if len(change['msg']) > 0:

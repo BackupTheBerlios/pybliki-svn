@@ -46,7 +46,7 @@ def getEntryInformation(filename):
 
     files = findall('`.*\<.*\>`__', text)
     for f in files:
-        if f.find('http://') == -1:
+        if f.find('http://') == -1 and f.find('.html') == -1:
             spos = f.find('<')
             epos = f.find('>')
             additional_files.append(f[spos+1:epos])

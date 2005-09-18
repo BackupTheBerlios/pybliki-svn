@@ -84,7 +84,10 @@ def main():
                         addpath = os.path.join(addpath, tocreate.pop())
                         os.mkdir(addpath)
 
-                    shutil.copy(os.path.join(root, f), filepath)
+                    try:
+                        shutil.copy(os.path.join(root, f), filepath)
+                    except IOError:
+                        pass
 
         # Remove ignored folders
         if '.svn' in dirs:
@@ -102,7 +105,7 @@ def main():
         f.write(page)
         f.close()
 
-        rss = generateRSS(root[len(blogroot):], cfg, entries)
+        rss = generateRSS(root[len(blogroot)+1:], cfg, entries)
         f = file(os.path.join(tempdir, dirname, 'index.rss'), 'w')
         f.write(rss)
         f.close()

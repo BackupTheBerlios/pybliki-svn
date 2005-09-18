@@ -36,6 +36,5 @@ TODO
 1. Unit-test (good habbit that I don't have)
 #. Time-zones configuration
 #. log file
-#. make it browsable easy (instead of header pointing to index.html make
-visible path)
+#. make it browsable easy (instead of header pointing to index.html make visible path)
 #. make configuration singleton but not parameter passed around

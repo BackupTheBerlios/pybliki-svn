@@ -38,3 +38,4 @@ TODO
 #. log file
 #. make it browsable easy (instead of header pointing to index.html make visible path)
 #. make configuration singleton but not parameter passed around
+#. easy installer

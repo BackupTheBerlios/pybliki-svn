@@ -20,7 +20,7 @@ Features
 ========
 
 1. RSS
-#. Can have directory structure of any deepness (not tested)
+#. Can have directory structure of any deepness
 #. Allows to use images and other files
 
 Bug fixes
@@ -33,8 +33,9 @@ Bug fixes
 TODO
 ====
 
-1. Modify CSS
-#. Unit-test (good habbit that I don't have)
+1. Unit-test (good habbit that I don't have)
 #. Time-zones configuration
 #. log file
-#. make it browsable easy
+#. make it browsable easy (instead of header pointing to index.html make
+visible path)
+#. make configuration singleton but not parameter passed around

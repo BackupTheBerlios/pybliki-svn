@@ -35,6 +35,5 @@ TODO
 ====
 
 1. Unit-test (good habbit that I don't have)
-#. Time-zones configuration
 #. make configuration singleton but not parameter passed around
 #. easy installer

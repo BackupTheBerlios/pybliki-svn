@@ -29,14 +29,12 @@ Bug fixes
 1. Banners' directory copied without .svn
 #. Use images
 #. small fixes in RSS
+#. at the top full path is shown
 
 TODO
 ====
 
 1. Unit-test (good habbit that I don't have)
 #. Time-zones configuration
-#. log file
-#. make it browsable easy (instead of header pointing to index.html make visible path)
 #. make configuration singleton but not parameter passed around
 #. easy installer
-#. use rsync instead of scp (or create possibility to choose)

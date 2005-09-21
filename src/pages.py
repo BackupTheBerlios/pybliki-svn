@@ -59,7 +59,7 @@ def generatePage(root, cfg, entry):
         eidx = sitepath.find('/', eidx+1)
 
     blogpath += '<a href="http://%s">%s</a>' % \
-                (os.path.join(webroot[1], sitepath,
+                (os.path.join(webroot[1], sitepath),
                  sitepath[sidx+1:])
 
     data['blogpath'] = blogpath

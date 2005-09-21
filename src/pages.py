@@ -42,7 +42,27 @@ def generatePage(root, cfg, entry):
     data['icon'] = os.path.join(relpath, icon)
     parts = publish_parts(entry['text'], writer_name='html')
     data['body'] = parts['html_body'].encode('utf-8')
-    data['blogname'] = cfg.get('blog', 'name')[1]
+
+    webroot = cfg.get('blog', 'webroot')
+    blogname = cfg.get('blog', 'name')
+    blogpath = '<a href="http://%s">%s</a>' % (webroot[1], blogname[1])
+    sitepath = root[len(webroot[0])+1:]
+
+    sidx = -1
+    eidx = sitepath.find('/')
+    while eidx != -1:
+        blogpath += '<a href="http://%s">%s</a>' % \
+                (os.path.join(webroot[1], sitepath[:eidx]),
+                 sitepath[sidx+1:eidx])
+
+        sidx = eidx
+        eidx = sitepath.find('/', eidx+1)
+
+    blogpath += '<a href="http://%s">%s</a>' % \
+                (os.path.join(webroot[1], sitepath,
+                 sitepath[sidx+1:])
+
+    data['blogpath'] = blogpath
     data['banners'] = generateBanners(root, cfg)
 
     locale.setlocale(locale.LC_ALL, cfg.get('blog', 'locale')[1])

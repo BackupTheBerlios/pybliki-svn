@@ -58,9 +58,10 @@ def generatePage(root, cfg, entry):
         sidx = eidx
         eidx = sitepath.find('/', eidx+1)
 
-    blogpath += '<a href="http://%s">%s</a>' % \
-                (os.path.join(webroot[1], sitepath),
-                 sitepath[sidx+1:])
+    if len(sitepath[sidx+1:]) > 0:
+        blogpath += '<a href="http://%s">%s</a>' % \
+                    (os.path.join(webroot[1], sitepath),
+                     sitepath[sidx+1:])
 
     data['blogpath'] = blogpath
     data['banners'] = generateBanners(root, cfg)

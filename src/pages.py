@@ -45,14 +45,15 @@ def generatePage(root, cfg, entry):
 
     webroot = cfg.get('blog', 'webroot')
     blogname = cfg.get('blog', 'name')
-    blogpath = '<a href="http://%s">%s</a>' % (webroot[1], blogname[1])
+    blogpath = '<a href="http://%s/index.html">%s</a>' \
+            % (webroot[1], blogname[1])
     sitepath = root[len(webroot[0])+1:]
 
     sidx = -1
     eidx = sitepath.find('/')
     while eidx != -1:
         blogpath += '/<a href="http://%s">%s</a>' % \
-                (os.path.join(webroot[1], sitepath[:eidx]),
+                (os.path.join(webroot[1], sitepath[:eidx], 'index.html'),
                  sitepath[sidx+1:eidx])
 
         sidx = eidx
@@ -60,7 +61,7 @@ def generatePage(root, cfg, entry):
 
     if len(sitepath[sidx+1:]) > 0:
         blogpath += '/<a href="http://%s">%s</a>' % \
-                    (os.path.join(webroot[1], sitepath),
+                    (os.path.join(webroot[1], sitepath, 'index.html'),
                      sitepath[sidx+1:])
 
     data['blogpath'] = blogpath

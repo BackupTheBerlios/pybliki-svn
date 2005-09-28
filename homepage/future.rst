@@ -6,3 +6,4 @@ TODO
 #. easy installer
 #. Doc-strings (there is such amount of things I do bad)
 #. refactor all code
+#. remember old versions of web page (currently all web page is rebuild)

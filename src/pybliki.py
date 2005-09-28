@@ -20,6 +20,8 @@ def main():
 
     cfg = BlikiConfig()
 
+    all_rsss = {}
+
     for root, dirs, files in os.walk(blogroot):
         cfg.testRoot(root, files)
 
@@ -105,8 +107,25 @@ def main():
         f.write(page)
         f.close()
 
-        rss = generateRSS(root[len(blogroot)+1:], cfg, entries)
+        rss = generateRSS(dirname, cfg, entries)
         f = file(os.path.join(tempdir, dirname, 'index.rss'), 'w')
+        f.write(rss)
+        f.close()
+
+        for entry in entries:
+            entry['dir'] = dirname
+
+        for rss_path, rss_entries in all_rsss.items():
+            if len(rss_path) < len(dirname) and \
+               dirname[:len(rss_path)] == rss_path:
+                rss_entries.extend(entries[:])
+
+        all_rsss[dirname] = entries[:]
+
+
+    for rss_path, rss_entries in all_rsss.items():
+        rss = generateRSS(rss_path, cfg, rss_entries)
+        f = file(os.path.join(tempdir, rss_path, 'all.rss'), 'w')
         f.write(rss)
         f.close()
 

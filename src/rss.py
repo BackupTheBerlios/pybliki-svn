@@ -15,13 +15,28 @@ def generateRSS(root, cfg, entries):
     text += '<description> %s at http://%s</description>' % \
             (cfg.get('blog', 'name')[1], cfg.get('blog', 'webroot')[1])
 
+    def date_sort(a, b):
+        if a['log'][-1]['date'] > b['log'][-1]['date']:
+            return -1
+        elif a['log'][-1]['date'] < b['log'][-1]['date']:
+            return 1
+        else:
+            return 0
+
+    entries.sort(date_sort)
+
     for entry in entries[:10]:
         if entry['name'] != 'index':
             text += '<item>'
             text += '<title> %s </title>' % entry["title"]
-            text += '<link>http://%s.html'\
-                  '</link>' % join(cfg.get('blog', 'webroot')[1],
-                                   root, entry['name'])
+            if entry.has_key('dir'):
+                text += '<link>http://%s.html'\
+                        '</link>' % join(cfg.get('blog', 'webroot')[1],
+                                         entry['dir'], entry['name'])
+            else:
+                text += '<link>http://%s.html'\
+                        '</link>' % join(cfg.get('blog', 'webroot')[1],
+                                         root, entry['name'])
 
             locale.setlocale(locale.LC_ALL, cfg.get('blog', 'locale')[1])
             rst = ''

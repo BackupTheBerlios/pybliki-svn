@@ -1,6 +1,9 @@
 import ConfigParser
 import os
 
+# XXX: This module has serious problem. The problem lies in testRoot.
+# It means that instead of os.walk recursive function must be used
+
 class BlikiConfigException(Exception):
     pass
 

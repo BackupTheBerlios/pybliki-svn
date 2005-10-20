@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 
-from sys import argv
+import sys
 import os
+
+sys.path.append('/home/dalius/lib/python2.3/site-packages')
+
 from tempfile import mkdtemp
 import shutil
 
@@ -11,11 +14,11 @@ from pages import generatePage, generateIndex
 from rss import generateRSS
 
 def main():
-    if len(argv) < 2:
+    if len(sys.argv) < 2:
         print 'PyBliki weblog_directory'
         return
 
-    blogroot = os.path.abspath(argv[1])
+    blogroot = os.path.abspath(sys.argv[1])
     tempdir = mkdtemp('', 'blog')
 
     cfg = BlikiConfig()

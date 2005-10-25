@@ -7,4 +7,4 @@ Taigi tai proga išmokti RST :-) Atrodo viskas jau juda link galo.
 * banner'io direktorija kopijuojame su subversion direktorija
 
 Najausi pakeitimai:
-* Implementuotas RSSyyy
+* Implementuotas RSS

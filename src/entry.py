@@ -23,7 +23,7 @@ def getEntryInformation(filename):
 
     msg = logentry.getElementsByTagName('msg')[0]
     if msg.firstChild is not None:
-        log['msg'] = msg.firstChild.nodeValue.encode('utf-8')
+        log['msg'] = msg.firstChild.nodeValue.encode('utf-8').strip()
     else:
         log['msg'] = ''
 
@@ -55,8 +55,9 @@ def getEntryInformation(filename):
             additional_files.append(f[spos+1:epos])
 
     # set data
+    text = text.replace('\r', '')
     data['text'] = text
-    data['title'] = text.split('\n', 1)[0].strip()
+    data['title'] = text.split('\n', 1)[0]
     data['name'] = os.path.splitext(os.path.basename(filename))[0]
     data['files'] = additional_files
 

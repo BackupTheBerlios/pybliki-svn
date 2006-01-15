@@ -28,7 +28,8 @@ def generateRSS(root, cfg, entries):
                         '</link>' % join(cfg.get('blog', 'webroot')[1],
                                          root, entry['name'])
 
-            parts = publish_parts(entry['text'], writer_name='html')
+            parts = publish_parts(entry['text'].split('\n\n')[1],
+                                  writer_name='html')
 
             text += '<description>%s</description>' % \
                     tr(parts['html_body'].encode('utf-8'))
@@ -36,7 +37,7 @@ def generateRSS(root, cfg, entries):
             locale.setlocale(locale.LC_ALL, 'C')
             text += '<pubDate>%s</pubDate>' % \
                     time.strftime("%a, %d %b %Y %H:%M:%S GMT",
-                                  entry['log'][-1]['date'])
+                                  entry['log']['date'])
             text += '</item>'
 
     text += '</channel>'

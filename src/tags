@@ -8,6 +8,7 @@ BlikiConfig	BlikiConfig.py	/^class BlikiConfig:$/;"	c
 BlikiConfigException	BlikiConfig.py	/^class BlikiConfigException(Exception):$/;"	c
 TestPyBliki	tests.py	/^class TestPyBliki(unittest.TestCase):$/;"	c
 __init__	BlikiConfig.py	/^    def __init__(self):$/;"	m	class:BlikiConfig
+date_sort	rss.py	/^    def date_sort(a, b):$/;"	f
 generateBanners	pages.py	/^def generateBanners(root, cfg):$/;"	f
 generateIndex	pages.py	/^def generateIndex(root, dirs, cfg, entries):$/;"	f
 generatePage	pages.py	/^def generatePage(root, cfg, entry):$/;"	f

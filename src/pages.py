@@ -22,10 +22,10 @@ def generateBanners(root, cfg):
                 link = links[0].firstChild.nodeValue.encode('utf-8')
 
             if image.find('http://') != -1:
-                result += '<a href="%s"><img border="0" src="%s"></a>' \
+                result += '<a href="%s"><img border="0" src="%s"></a>\n' \
                         % (link, image)
             else:
-                result += '<a href="%s"><img border="0" src="%s"></a>' % \
+                result += '<a href="%s"><img border="0" src="%s"></a>\n' % \
                         (link, os.path.join(relpath, banners_dir, image))
     return result
 
@@ -33,7 +33,7 @@ def generateBanners(root, cfg):
 def generatePage(root, cfg, entry):
     data = {}
     data['title'] = entry['title']
-    data['author'] = entry['log'][-1]['author']
+    data['author'] = entry['log']['author']
     path, css = cfg.get('misc', 'css')
     relpath = '../'*root[len(path):].count('/')
     data['css'] =  os.path.join(relpath, css)
@@ -69,7 +69,7 @@ def generatePage(root, cfg, entry):
 
     locale.setlocale(locale.LC_ALL, cfg.get('blog', 'locale')[1])
     data['date'] = time.strftime(cfg.get('blog', 'timestamp')[1],
-                                 entry['log'][0]['date'])
+                                 entry['log']['date'])
 
     path, tmplname = cfg.get('blog', 'template')
     f = file(os.path.join(path, tmplname))
@@ -83,11 +83,11 @@ def generateIndex(root, dirs, cfg, entries):
     entry = {}
     entry['title'] = 'Index'
     if len(entries) > 0:
-        entry['log'] = [{'date': entries[0]['log'][0]['date'],
-                         'author': entries[0]['log'][0]['author']}]
+        entry['log'] = {'date': entries[0]['log']['date'],
+                        'author': entries[0]['log']['author']}
     else:
-        entry['log'] = [{'date': time.gmtime(time.time()),
-                         'author': ''}]
+        entry['log'] = {'date': time.gmtime(time.time()),
+                        'author': ''}
 
     text = 'Index\n=====\n\n'
 
@@ -100,16 +100,6 @@ def generateIndex(root, dirs, cfg, entries):
 
     for idx, e in enumerate(entries):
         text += '%d. `%s <%s>`__\n' % (idx+1, e['title'], e['name']+'.html')
-
-        e['log'].reverse()
-
-        for change in e['log']:
-            if len(change['msg']) > 0:
-                text += ' '*4 + time.strftime(cfg.get('blog', 'timestamp')[1],
-                                             change['date']) + '\n'
-                for line in change['msg'].split('\n'):
-                    text += ' '*8 + line + '\n'
-                text += '\n'
 
     entry['text'] = text
 

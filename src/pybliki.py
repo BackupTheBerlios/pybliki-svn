@@ -13,6 +13,16 @@ from entry import getEntryInformation
 from pages import generatePage, generateIndex
 from rss import generateRSS
 
+
+def date_sort(a, b):
+    if a['log']['date'] > b['log']['date']:
+        return -1
+    elif a['log']['date'] < b['log']['date']:
+        return 1
+    else:
+        return 0
+
+
 def main():
     if len(sys.argv) < 2:
         print 'PyBliki weblog_directory'
@@ -105,6 +115,8 @@ def main():
         if index_exists:
             logfile = 'log.html'
 
+        entries.sort(date_sort)
+
         page = generateIndex(root, dirs, cfg, entries)
         f = file(os.path.join(tempdir, dirname, logfile), 'w')
         f.write(page)
@@ -120,13 +132,14 @@ def main():
 
         for rss_path, rss_entries in all_rsss.items():
             if len(rss_path) < len(dirname) and \
-               dirname[:len(rss_path)] == rss_path:
+                    dirname[:len(rss_path)] == rss_path:
                 rss_entries.extend(entries[:])
 
         all_rsss[dirname] = entries[:]
 
 
     for rss_path, rss_entries in all_rsss.items():
+        rss_entries.sort(date_sort)
         rss = generateRSS(rss_path, cfg, rss_entries)
         f = file(os.path.join(tempdir, rss_path, 'all.rss'), 'w')
         f.write(rss)

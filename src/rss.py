@@ -15,20 +15,10 @@ def generateRSS(root, cfg, entries):
     text += '<description> %s at http://%s</description>' % \
             (cfg.get('blog', 'name')[1], cfg.get('blog', 'webroot')[1])
 
-    def date_sort(a, b):
-        if a['log'][-1]['date'] > b['log'][-1]['date']:
-            return -1
-        elif a['log'][-1]['date'] < b['log'][-1]['date']:
-            return 1
-        else:
-            return 0
-
-    entries.sort(date_sort)
-
     for entry in entries[:10]:
-        if entry['name'] != 'index':
+        if entry['name'] != 'index' and entry['log']['msg'] == 'publish':
             text += '<item>'
-            text += '<title> %s </title>' % entry["title"]
+            text += '<title> %s </title>' % entry['title']
             if entry.has_key('dir'):
                 text += '<link>http://%s.html'\
                         '</link>' % join(cfg.get('blog', 'webroot')[1],
@@ -38,23 +28,11 @@ def generateRSS(root, cfg, entries):
                         '</link>' % join(cfg.get('blog', 'webroot')[1],
                                          root, entry['name'])
 
-            locale.setlocale(locale.LC_ALL, cfg.get('blog', 'locale')[1])
-            rst = ''
-            if len(entry['log']) == 1:
-                rst = entry['log'][0]['msg']
-            else:
-                for change in entry['log']:
-                    if len(change['msg']) > 0:
-                        rst += time.strftime(cfg.get('blog', 'timestamp')[1],
-                                                     change['date']) + '\n'
-                        for line in change['msg'].split('\n'):
-                            rst += ' '*4 + line + '\n'
-                        rst += '\n'
-
-            parts = publish_parts(rst, writer_name='html')
+            parts = publish_parts(entry['text'], writer_name='html')
 
             text += '<description>%s</description>' % \
                     tr(parts['html_body'].encode('utf-8'))
+
             locale.setlocale(locale.LC_ALL, 'C')
             text += '<pubDate>%s</pubDate>' % \
                     time.strftime("%a, %d %b %Y %H:%M:%S GMT",

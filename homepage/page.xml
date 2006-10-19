@@ -11,6 +11,12 @@
     <link rel="shortcut icon" href="%(icon)s" type="image/x-icon" />
 </head>
 <body>
+    <div class="message">
+        This project is discontinued. My new bliki system is
+        <a href="http://dado1945.storas.lt/wiki/lt/dado1945/tekshtpleksht">
+            tekshtpleksht
+        </a>
+    </div>
     <h1><a href="index.html">%(blogpath)s</a></h1>
     <div class="date">%(date)s</div>
     %(body)s
